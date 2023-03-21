@@ -19,9 +19,9 @@ public class EchoTCPServer {
 	}
 	
 	public void init() throws Exception {
-		listener = new ServerSocket(PORT);
+		//listener = new ServerSocket(PORT);
 		while (true) {
-			serverSideSocket = listener.accept();
+			//serverSideSocket = listener.accept();
 			createStreams(serverSideSocket);
 			protocol(serverSideSocket);
 		}
