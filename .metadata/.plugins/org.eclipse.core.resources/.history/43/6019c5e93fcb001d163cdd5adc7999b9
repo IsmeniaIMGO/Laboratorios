@@ -1,0 +1,9 @@
+package iteraciones;
+
+import java.util.ArrayList;
+
+public class Banco {
+	private String nombre;
+	private ArrayList<Usuario>listaUsuarios = new ArrayList<Usuario>();
+	private ArrayList<Cuenta>listaCuentas = new ArrayList<Cuenta>();
+}

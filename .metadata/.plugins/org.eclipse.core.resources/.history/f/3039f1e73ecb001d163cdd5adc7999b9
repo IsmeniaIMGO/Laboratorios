@@ -1,0 +1,10 @@
+package iteraciones;
+
+public class Cuenta {
+	
+	private String id;
+	private int saldo;
+	private String clave;
+	
+
+}

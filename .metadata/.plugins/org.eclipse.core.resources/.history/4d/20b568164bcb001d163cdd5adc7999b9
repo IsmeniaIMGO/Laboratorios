@@ -1,0 +1,29 @@
+package application;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import model.*;
+
+public class Aplicacion {
+	private static final Scanner SCANNER = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		
+		System.out.println("Bienvenido al banco \n ingrese su nombre:");
+		String  nombre = SCANNER.nextLine();
+		System.out.println("ingrese su apellido:");
+		String  apellido = SCANNER.nextLine();
+		System.out.println("ingrese su cedula:");
+		String  cedula = SCANNER.nextLine();
+		ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
+		Usuario usuario = new Usuario(nombre, apellido, cedula);
+		listaUsuarios.add(usuario);
+		
+		
+		
+		
+
+	}
+
+}

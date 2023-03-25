@@ -1,0 +1,9 @@
+package exceptions;
+
+public class NuloVacioException {
+
+	public NuloVacioException() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

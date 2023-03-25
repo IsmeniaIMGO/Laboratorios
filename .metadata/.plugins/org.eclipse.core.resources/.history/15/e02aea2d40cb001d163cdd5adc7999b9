@@ -1,0 +1,83 @@
+package iteraciones;
+
+import java.util.ArrayList;
+
+public class Banco {
+	private String nombre;
+	private ArrayList<Usuario>listaUsuarios = new ArrayList<Usuario>();
+	private ArrayList<Cuenta>listaCuentas = new ArrayList<Cuenta>();
+	
+	
+	public Banco(String nombre, ArrayList<Usuario> listaUsuarios, ArrayList<Cuenta> listaCuentas) {
+		this.nombre = nombre;
+		this.listaUsuarios = listaUsuarios;
+		this.listaCuentas = listaCuentas;
+	}
+
+
+	public String getNombre() {
+		return nombre;
+	}
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+	public ArrayList<Usuario> getListaUsuarios() {
+		return listaUsuarios;
+	}
+
+
+	public void setListaUsuarios(ArrayList<Usuario> listaUsuarios) {
+		this.listaUsuarios = listaUsuarios;
+	}
+
+
+	public ArrayList<Cuenta> getListaCuentas() {
+		return listaCuentas;
+	}
+
+
+	public void setListaCuentas(ArrayList<Cuenta> listaCuentas) {
+		this.listaCuentas = listaCuentas;
+	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Banco other = (Banco) obj;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		return true;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Banco [nombre=" + nombre + ", listaUsuarios=" + listaUsuarios + ", listaCuentas=" + listaCuentas + "]";
+	}
+	
+	
+	
+	
+}

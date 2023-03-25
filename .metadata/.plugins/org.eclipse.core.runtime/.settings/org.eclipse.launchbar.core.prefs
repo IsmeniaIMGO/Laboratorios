@@ -1,7 +1,11 @@
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
-configDescList=org.eclipse.launchbar.core.descriptorType.default\:EchoUDPServer,org.eclipse.launchbar.core.descriptorType.default\:EchoUDPClient,org.eclipse.launchbar.core.descriptorType.default\:EchoTCPServer,org.eclipse.launchbar.core.descriptorType.default\:EchoTCPClient,org.eclipse.launchbar.core.descriptorType.default\:UsersTCPServer,org.eclipse.launchbar.core.descriptorType.default\:UsersTCPClient,org.eclipse.launchbar.core.descriptorType.default\:UsersTCPServer (1),org.eclipse.launchbar.core.descriptorType.default\:UsersTCPClient (1)
+configDescList=org.eclipse.launchbar.core.descriptorType.default\:EchoTCPServer (1),org.eclipse.launchbar.core.descriptorType.default\:EchoTCPClient (1),org.eclipse.launchbar.core.descriptorType.default\:EchoUDPServer,org.eclipse.launchbar.core.descriptorType.default\:EchoUDPClient,org.eclipse.launchbar.core.descriptorType.default\:EchoTCPServer,org.eclipse.launchbar.core.descriptorType.default\:EchoTCPClient,org.eclipse.launchbar.core.descriptorType.default\:UsersTCPServer,org.eclipse.launchbar.core.descriptorType.default\:UsersTCPClient,org.eclipse.launchbar.core.descriptorType.default\:UsersTCPServer (1),org.eclipse.launchbar.core.descriptorType.default\:UsersTCPClient (1),org.eclipse.launchbar.core.descriptorType.default\:Servidor,org.eclipse.launchbar.core.descriptorType.default\:Cliente,org.eclipse.launchbar.core.descriptorType.default\:Aplicacion,org.eclipse.launchbar.core.descriptorType.default\:Servidor (1),org.eclipse.launchbar.core.descriptorType.default\:Cliente (1)
 eclipse.preferences.version=1
+org.eclipse.launchbar.core.descriptorType.default\:Cliente/activeLaunchMode=run
+org.eclipse.launchbar.core.descriptorType.default\:Cliente/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
+org.eclipse.launchbar.core.descriptorType.default\:EchoTCPClient\ (1)/activeLaunchMode=run
+org.eclipse.launchbar.core.descriptorType.default\:EchoTCPClient\ (1)/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
 org.eclipse.launchbar.core.descriptorType.default\:EchoTCPClient/activeLaunchMode=run
 org.eclipse.launchbar.core.descriptorType.default\:EchoTCPClient/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
 org.eclipse.launchbar.core.descriptorType.default\:EchoUDPClient/activeLaunchMode=run

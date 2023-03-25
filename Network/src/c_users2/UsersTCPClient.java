@@ -32,31 +32,10 @@ public class UsersTCPClient {
 		
         System.out.print("Ingrese un comando:\n LOGIN nombreUsuario\n INFORME\n INFORME_DETALLADO\n ");
         comando = SCANNER.nextLine();
-
-        if (comando.startsWith("LOGIN")) {
-    		toNetwork.println(comando);
-    		String fromServer = fromNetwork.readLine();
-    		System.out.println("[Client] From server: " + fromServer);
-
-        } else if (comando.equals("INFORME")) {
-	    		toNetwork.println(comando);
-	    		String fromServer = fromNetwork.readLine();
-	    		System.out.println("[Client] From server: " + fromServer);
-	    		
-        } else if (comando.equals("INFORME_DETALLADO")) {
-    		toNetwork.println(comando);
-    		String fromServer = fromNetwork.readLine();
-    		System.out.println("[Client] From server: " + fromServer);
-        
-        } else if (!comando.equals("LOGIN")||!comando.equals("INFORME")||!comando.equals("INFORME_DETALLADO")) {
-        	toNetwork.println(comando);
-    		String fromServer = fromNetwork.readLine();
-    		System.out.println("[Client] From server: " + fromServer);
-		}{
-    		
-        }
+        toNetwork.println(comando);
+		String fromServer = fromNetwork.readLine();
+		System.out.println("[Client] From server: " + fromServer);
     
-
 	}
 	
 	private void createStreams(Socket socket) throws Exception {

@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class EchoTCPClient {
 
 	private static final Scanner SCANNER = new Scanner(System.in);
-	public static final String SERVER = "192.168.20.26";
+	public static final String SERVER = "localhost";
 	public static final int PORT = 3400;
 	private PrintWriter toNetwork;
 	private BufferedReader fromNetwork;
