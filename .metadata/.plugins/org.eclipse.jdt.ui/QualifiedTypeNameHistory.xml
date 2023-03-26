@@ -6,5 +6,15 @@
 <fullyQualifiedTypeName name="java.util.Map.Entry"/>
 <fullyQualifiedTypeName name="java.net.ServerSocket"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="exceptions.NuloVacioException"/>
+<fullyQualifiedTypeName name="model.Cuenta"/>
+<fullyQualifiedTypeName name="model.Banco"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="controller.Cliente"/>
+<fullyQualifiedTypeName name="controller.Servidor"/>
+<fullyQualifiedTypeName name="application.Aplicacion"/>
+<fullyQualifiedTypeName name="model.Usuario"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="javax.sound.midi.Soundbank"/>
 </qualifiedTypeNameHistroy>

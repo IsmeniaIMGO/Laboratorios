@@ -1,0 +1,6 @@
+package services;
+
+public interface ITransaccionesCuenta {
+
+	public void ConsignarDinero(String id, String cedula, int Cantidad) throws Exception
+}

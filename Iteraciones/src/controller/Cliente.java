@@ -31,7 +31,10 @@ public class Cliente {
 		System.out.println("Escriba el numero de la accion que desea realizar en el banco"
 				+ "\n 1. Crear cuenta"
 				+ "\n 2. actualizar cuenta"
-				+ "\n 3. eliminar cuenta");
+				+ "\n 3. eliminar cuenta"
+				+ "\n 4. consignar dinero en una cuenta"
+				+ "\n 5. transferir dinero de mi cuenta a otra"
+				+ "\n 6. retirar dinero de mi cuenta");
 		
 		String comando = SCANNER.nextLine();
 

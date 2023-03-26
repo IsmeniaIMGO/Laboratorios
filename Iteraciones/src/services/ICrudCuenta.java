@@ -5,7 +5,7 @@ import model.Cuenta;
 public interface ICrudCuenta {
 	public Cuenta crearCuenta(String id, int saldo, String clave, String nombreUsuario, String apellidoUsuario, String cedula) throws Exception;
 	
-	public String buscarCuenta(String id) throws Exception;
+	public String informacionCuenta(String id) throws Exception;
 	
 	public boolean existeCuenta(String id)  throws NullPointerException;
 	

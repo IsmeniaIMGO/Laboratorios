@@ -67,6 +67,8 @@ public class Banco implements ICrudCuenta, ITransaccionesCuenta {
 		return "Banco [nombre=" + nombre  + ", listaCuentas=" + listaCuentas + "]";
 	}
 	
+	
+	
 	@Override
 	public Cuenta crearCuenta(String id, int saldo, String clave, String nombreUsuario, String apellidoUsuario, String cedula) throws Exception{
 		if(existeCuenta(id))
@@ -85,7 +87,7 @@ public class Banco implements ICrudCuenta, ITransaccionesCuenta {
 	}
 	
 	@Override
-	public String buscarCuenta(String id) throws Exception{
+	public String informacionCuenta(String id) throws Exception{
 		for (Cuenta c : listaCuentas) {
 			if(c.getId().equals(id))
 				return c.toString();	
@@ -93,6 +95,17 @@ public class Banco implements ICrudCuenta, ITransaccionesCuenta {
 		return "No existe";
 		
 	}
+	
+	
+	public int SaldoCuenta(String id) throws Exception{
+		for (Cuenta c : listaCuentas) {
+			if(c.getId().equals(id))
+				return c.getSaldo();	
+		}
+		return 0;
+		
+	}
+	
 	
 	@Override
 	public boolean existeCuenta(String id)  throws NullPointerException {
@@ -132,6 +145,90 @@ public class Banco implements ICrudCuenta, ITransaccionesCuenta {
 				listaCuentas.remove(c);
 			break;
 		}
+	}
+
+
+	@Override
+	public void ConsignarDinero(String id, String cedula, int cantidad) throws Exception {
+		if(!id.equals("")){
+			
+			if(!existeCuenta(id))
+				throw new CuentaException("no existe ninguna cuenta con id "+id+" registrado en el Banco");
+			
+			if (cedula.equals("") || cantidad == 0)
+				throw new ParametroVacioException("Alguno de los parámetros indicados es está vacío");
+
+			for(Cuenta c : listaCuentas){
+				if(c != null && c.getId() != null && c.getId().equals(id) && c.getCedula().equals(cedula)){
+					int nuevoSaldo = c.getSaldo()+cantidad;
+					c.setSaldo(nuevoSaldo);
+					break;
+				}
+			}
+		}
+		
+	}
+
+
+	@Override
+	public void TransferirDinero(String idDestino, int cantidad, String idOrigen, String clave) throws Exception {
+		if(!idDestino.equals("") && !idOrigen.equals("") ){
+			if(!existeCuenta(idDestino))
+				throw new CuentaException("no existe ninguna cuenta con id de destino "+idDestino+" registrado en el Banco");
+			if(!existeCuenta(idOrigen))
+				throw new CuentaException("no existe ninguna cuenta con id de origen "+idOrigen+" registrado en el Banco");
+			if (cantidad == 0)
+				throw new ParametroVacioException("Alguno de los parámetros indicados es está vacío");
+			if (clave.length()>4 || clave.length()<4)
+				throw new ClaveException("La clave debe tener 4 digitos");
+			
+			for(Cuenta c: listaCuentas) {
+				if(c.getId().equals(idOrigen) && c.getClave().equals(clave)){
+					if(cantidad > c.getSaldo()){
+						throw new CantidadException("la cantidad que quiere transferir no puede ser mayor a su saldo");
+					}else {
+						int nuevoSaldoOrigen = c.getSaldo()-cantidad;
+						c.setSaldo(nuevoSaldoOrigen);
+						break;
+					}
+				}
+			}
+			
+			for(Cuenta c: listaCuentas) {
+				if(c.getId().equals(idDestino)){
+					int nuevoSaldoDestino = c.getSaldo()+cantidad;
+					c.setSaldo(nuevoSaldoDestino);
+					break;
+				}
+			}
+		}
+		
+	}
+
+
+	@Override
+	public void RetirarDinero(String cedula, String id, int cantidad, String clave) throws Exception {
+		if(!id.equals("")){
+			if(!existeCuenta(id))
+				throw new CuentaException("no existe ninguna cuenta con id "+id+" registrado en el Banco");
+			if (cantidad == 0 || cedula.equals(""))
+				throw new ParametroVacioException("Alguno de los parámetros indicados es está vacío");
+			if (clave.length()>4 || clave.length()<4)
+				throw new ClaveException("La clave debe tener 4 digitos");
+
+			for(Cuenta c: listaCuentas) {
+				if(c.getId().equals(id) && c.getClave().equals(clave)){
+					if(cantidad > c.getSaldo()){
+						throw new CantidadException("la cantidad que quiere transferir no puede ser mayor a su saldo");
+					}else {
+						int nuevoSaldo = c.getSaldo()-cantidad;
+						c.setSaldo(nuevoSaldo);
+						break;
+					}
+				}
+			}
+		}
+		
 	}
 	
 	

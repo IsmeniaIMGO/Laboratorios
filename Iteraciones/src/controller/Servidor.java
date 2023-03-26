@@ -63,7 +63,7 @@ public class Servidor {
 			
 			banco.crearCuenta(id, saldo, clave, nombreUsuario, apellidoUsuario, cedula);
 			
-			String answer = "Cuenta creada: "+banco.buscarCuenta(id);
+			String answer = "Cuenta creada: "+banco.informacionCuenta(id);
 			toNetwork.println(answer);
 			
 		}else if (comando.equals("2")) {
@@ -77,7 +77,7 @@ public class Servidor {
 			String nuevoApellido = SCANNER.nextLine();
 			
 			banco.actualizarCuenta(id, clave, nuevoNombre, nuevoApellido);
-			String answer = "Cuenta actualizada: "+banco.buscarCuenta(id);
+			String answer = "Cuenta actualizada: "+banco.informacionCuenta(id);
 			toNetwork.println(answer);
 
 		
@@ -92,6 +92,53 @@ public class Servidor {
 			banco.eliminarCuenta(id, motivo, clave);
 			String answer = "Cuenta: "+id +" eliminada por: "+motivo;
 			toNetwork.println(answer);
+			
+		}else if (comando.equals("4")) {
+			System.out.println("Ingrese el numero de la cuenta");
+			String id = SCANNER.nextLine();
+			System.out.println("ingrese su cedula:");
+			String  cedula = SCANNER.nextLine();
+			System.out.println("ingrese la cantidad de dinero que va consignar ");
+			int cantidad = SCANNER.nextInt();
+			SCANNER.nextLine();
+			
+			banco.ConsignarDinero(id, cedula, cantidad);
+			String answer = "se ha consigando en la cuenta numero: "+id + " su nuevo saldo es: " +banco.SaldoCuenta(id) ;
+			toNetwork.println(answer);
+
+			
+		}else if (comando.equals("5")) {
+			System.out.println("Ingrese el numero de la cuenta a la que va tranferir (destino)");
+			String idDestino = SCANNER.nextLine();
+			System.out.println("Ingrese el numero de su cuenta (origen)");
+			String idOrigen = SCANNER.nextLine();
+			System.out.println("ingrese la cantidad de dinero que va transferir ");
+			int cantidad = SCANNER.nextInt();
+			SCANNER.nextLine();
+			System.out.println("Ingrese la clave: ");
+			String clave = SCANNER.nextLine();
+			
+			banco.TransferirDinero(idDestino, cantidad, idOrigen, clave);
+			String answer = "se ha transferido "+cantidad+" a la cuenta numero: "+idDestino + " su nuevo saldo es: " +banco.SaldoCuenta(idOrigen) ;
+			toNetwork.println(answer);
+
+
+			
+		}else if (comando.equals("6")) {
+			System.out.println("ingrese su cedula:");
+			String  cedula = SCANNER.nextLine();
+			System.out.println("Ingrese el numero de la cuenta");
+			String id = SCANNER.nextLine();
+			System.out.println("ingrese la cantidad de dinero que va retirar ");
+			int cantidad = SCANNER.nextInt();
+			SCANNER.nextLine();
+			System.out.println("Ingrese la clave: ");
+			String clave = SCANNER.nextLine();
+
+			banco.RetirarDinero(cedula, id, cantidad, clave);
+			String answer = "se ha retirado "+cantidad+" de la cuenta numero: "+id + " su nuevo saldo es: " +banco.SaldoCuenta(id) ;
+			toNetwork.println(answer);
+
 			
 		}else if (!comando.equals("1")||!comando.equals("2")||!comando.equals("3")){
 			String answer = "error 400: opcion no encontrada";
