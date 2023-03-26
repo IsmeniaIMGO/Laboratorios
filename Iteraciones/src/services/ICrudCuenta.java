@@ -3,7 +3,7 @@ package services;
 import model.Cuenta;
 
 public interface ICrudCuenta {
-	public Cuenta crearCuenta(String id, int saldo, String clave, String nombreUsuario, String apellidoUsuario, String cedula) throws Exception;
+	public Cuenta crearCuenta(String id, String nombreUsuario, String apellidoUsuario, String cedula ,int saldo, String clave) throws Exception;
 	
 	public String informacionCuenta(String id) throws Exception;
 	

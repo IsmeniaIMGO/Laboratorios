@@ -70,7 +70,7 @@ public class Banco implements ICrudCuenta, ITransaccionesCuenta {
 	
 	
 	@Override
-	public Cuenta crearCuenta(String id, int saldo, String clave, String nombreUsuario, String apellidoUsuario, String cedula) throws Exception{
+	public Cuenta crearCuenta(String id, String nombreUsuario, String apellidoUsuario, String cedula, int saldo, String clave ) throws Exception{
 		if(existeCuenta(id))
 			throw new IdYaExisteException("Esta numero de cuenta ya se encuentra registrada");
 		if (clave.length()>4 || clave.length()<4)
@@ -159,7 +159,7 @@ public class Banco implements ICrudCuenta, ITransaccionesCuenta {
 				throw new ParametroVacioException("Alguno de los parámetros indicados es está vacío");
 
 			for(Cuenta c : listaCuentas){
-				if(c != null && c.getId() != null && c.getId().equals(id) && c.getCedula().equals(cedula)){
+				if(c != null && c.getId() != null && c.getId().equals(id)){
 					int nuevoSaldo = c.getSaldo()+cantidad;
 					c.setSaldo(nuevoSaldo);
 					break;

@@ -23,7 +23,7 @@ public class Servidor {
 	ArrayList<Cuenta>listaCuentas = new ArrayList<Cuenta>();
 	Banco banco = new Banco("x", listaCuentas);
 	Random random = new Random();
-
+	String[]palabras = new String[]{};
 
 	public Servidor() {
 		System.out.println("Echo TCP server is running on port: " + PORT);
@@ -41,82 +41,62 @@ public class Servidor {
 	}
 	
 	public void protocol(Socket socket) throws Exception {
-		String comando = fromNetwork.readLine();
-		System.out.println("[Server] From client: " + comando);
-					
-		if (comando.equals("1")) {
+		String mensaje = fromNetwork.readLine();
+		System.out.println("[Server] From client: " + mensaje);
+		
+		palabras = mensaje.split("/");
+		
+		if (palabras[0].equals("1")) {
 
-			System.out.println("\n Bienvenido al banco \n ingrese su nombre:");
-			String  nombreUsuario = SCANNER.nextLine();
-			System.out.println("ingrese su apellido:");
-			String  apellidoUsuario = SCANNER.nextLine();
-			System.out.println("ingrese su cedula:");
-			String  cedula = SCANNER.nextLine();
-			System.out.println("ingrese la cantidad de dinero que va consignar ");
-			int saldo = SCANNER.nextInt();
-			SCANNER.nextLine();
-			System.out.println("Ingrese la clave de 4 digitos");
-			String clave = SCANNER.nextLine();
-			
 			int numero = random.nextInt(2000-1000+1)+1000;
 			String id = Integer.toString(numero);
 			
-			banco.crearCuenta(id, saldo, clave, nombreUsuario, apellidoUsuario, cedula);
+			String nombreUsuario = palabras[1];
+			String apellidoUsuario = palabras[2];
+			String cedula = palabras[3];
+			int cantidad = Integer.parseInt(palabras[4]);
+			String clave = palabras[5];
 			
+			banco.crearCuenta(id,nombreUsuario,apellidoUsuario, cedula, cantidad, clave );
 			String answer = "Cuenta creada: "+banco.informacionCuenta(id);
 			toNetwork.println(answer);
 			
-		}else if (comando.equals("2")) {
-			System.out.println("Ingrese el numero de cuenta a modificar: ");
-			String id = SCANNER.nextLine();
-			System.out.println("Ingrese la clave: ");
-			String clave = SCANNER.nextLine();
-			System.out.println("Ingrese el nuevo nombre de usuario");
-			String nuevoNombre = SCANNER.nextLine();
-			System.out.println("Ingrese el nuevo apellido del usuario");
-			String nuevoApellido = SCANNER.nextLine();
+		}else if (palabras[0].equals("2")) {
+			String id = palabras[1];
+			String clave = palabras[2];
+			String nuevoNombre = palabras[3];
+			String nuevoApellido = palabras[4];
 			
 			banco.actualizarCuenta(id, clave, nuevoNombre, nuevoApellido);
 			String answer = "Cuenta actualizada: "+banco.informacionCuenta(id);
 			toNetwork.println(answer);
 
 		
-		}else if (comando.equals("3")) {
-			System.out.println("Ingrese el numero de cuenta a eliminar: ");
-			String id = SCANNER.nextLine();
-			System.out.println("Ingrese el motivo de eliminacion de la cuenta: ");
-			String motivo = SCANNER.nextLine();
-			System.out.println("Ingrese la clave: ");
-			String clave = SCANNER.nextLine();
+		}else if (palabras[0].equals("3")) {
+			String id = palabras[1];
+			String motivo = palabras[2];
+			String clave = palabras[3];
 			
 			banco.eliminarCuenta(id, motivo, clave);
 			String answer = "Cuenta: "+id +" eliminada por: "+motivo;
 			toNetwork.println(answer);
 			
-		}else if (comando.equals("4")) {
-			System.out.println("Ingrese el numero de la cuenta");
-			String id = SCANNER.nextLine();
-			System.out.println("ingrese su cedula:");
-			String  cedula = SCANNER.nextLine();
-			System.out.println("ingrese la cantidad de dinero que va consignar ");
-			int cantidad = SCANNER.nextInt();
-			SCANNER.nextLine();
+		}else if (palabras[0].equals("4")) {
+			String id = palabras[1];
+			String cedula = palabras[2];
+			int cantidad = Integer.parseInt(palabras[3]);
 			
 			banco.ConsignarDinero(id, cedula, cantidad);
 			String answer = "se ha consigando en la cuenta numero: "+id + " su nuevo saldo es: " +banco.SaldoCuenta(id) ;
 			toNetwork.println(answer);
 
 			
-		}else if (comando.equals("5")) {
-			System.out.println("Ingrese el numero de la cuenta a la que va tranferir (destino)");
-			String idDestino = SCANNER.nextLine();
-			System.out.println("Ingrese el numero de su cuenta (origen)");
-			String idOrigen = SCANNER.nextLine();
-			System.out.println("ingrese la cantidad de dinero que va transferir ");
-			int cantidad = SCANNER.nextInt();
-			SCANNER.nextLine();
-			System.out.println("Ingrese la clave: ");
-			String clave = SCANNER.nextLine();
+		}else if (palabras[0].equals("5")) {
+			String idDestino = palabras[1];
+			int cantidad = Integer.parseInt(palabras[2]);
+			String idOrigen = palabras[3];
+			String clave = palabras[4];
+			
 			
 			banco.TransferirDinero(idDestino, cantidad, idOrigen, clave);
 			String answer = "se ha transferido "+cantidad+" a la cuenta numero: "+idDestino + " su nuevo saldo es: " +banco.SaldoCuenta(idOrigen) ;
@@ -124,23 +104,19 @@ public class Servidor {
 
 
 			
-		}else if (comando.equals("6")) {
-			System.out.println("ingrese su cedula:");
-			String  cedula = SCANNER.nextLine();
-			System.out.println("Ingrese el numero de la cuenta");
-			String id = SCANNER.nextLine();
-			System.out.println("ingrese la cantidad de dinero que va retirar ");
-			int cantidad = SCANNER.nextInt();
-			SCANNER.nextLine();
-			System.out.println("Ingrese la clave: ");
-			String clave = SCANNER.nextLine();
+		}else if (palabras[0].equals("6")) {
+			String cedula = palabras[1];
+			String id = palabras[2];
+			int cantidad = Integer.parseInt(palabras[3]);
+			String clave = palabras[4];
 
 			banco.RetirarDinero(cedula, id, cantidad, clave);
 			String answer = "se ha retirado "+cantidad+" de la cuenta numero: "+id + " su nuevo saldo es: " +banco.SaldoCuenta(id) ;
 			toNetwork.println(answer);
 
 			
-		}else if (!comando.equals("1")||!comando.equals("2")||!comando.equals("3")){
+		}else if (!palabras[0].equals("1")||!palabras[0].equals("2")||!palabras[0].equals("3")
+					||!palabras[0].equals("4")||!palabras[0].equals("5")||!palabras[0].equals("6")){
 			String answer = "error 400: opcion no encontrada";
 			toNetwork.println(answer);
 		}
