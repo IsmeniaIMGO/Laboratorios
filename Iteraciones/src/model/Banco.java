@@ -5,16 +5,26 @@ import exceptions.*;
 import services.*;
 
 public class Banco implements ICrudCuenta, ITransaccionesCuenta {
+	/**
+	 * Atributos
+	 */
 	private String nombre;
 	private ArrayList<Cuenta>listaCuentas = new ArrayList<Cuenta>();
 	
-	
+	/**
+	 * constructor
+	 * @param nombre
+	 * @param listaCuentas
+	 */
 	public Banco(String nombre, ArrayList<Cuenta> listaCuentas) {
 		this.nombre = nombre;
 		this.listaCuentas = listaCuentas;
 	}
 
-
+	/**
+	 * metodos set y get de atributos
+	 * @return
+	 */
 	public String getNombre() {
 		return nombre;
 	}
@@ -35,6 +45,9 @@ public class Banco implements ICrudCuenta, ITransaccionesCuenta {
 	}
 
 
+	/**
+	 * metodo hashcode con el atributo nombre
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -44,6 +57,9 @@ public class Banco implements ICrudCuenta, ITransaccionesCuenta {
 	}
 
 
+	/**
+	 * metodo equals con el atributo nombre
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -62,13 +78,20 @@ public class Banco implements ICrudCuenta, ITransaccionesCuenta {
 	}
 
 
+	/**
+	 * metodo to string
+	 */
 	@Override
 	public String toString() {
 		return "Banco [nombre=" + nombre  + ", listaCuentas=" + listaCuentas + "]";
 	}
 	
 	
-	
+	/**
+	 * metodo implementado del paquete de servicios
+	 * que me permite crear una cuenta y 
+	 * agregarla al banco
+	 */
 	@Override
 	public Cuenta crearCuenta(String id, String nombreUsuario, String apellidoUsuario, String cedula, int saldo, String clave ) throws Exception{
 		if(existeCuenta(id))
@@ -86,6 +109,10 @@ public class Banco implements ICrudCuenta, ITransaccionesCuenta {
 		
 	}
 	
+	/**
+	 * metodo implementado del paquete de servicios
+	 * que me devuelve la informacion de la cuenta
+	 */
 	@Override
 	public String informacionCuenta(String id) throws Exception{
 		for (Cuenta c : listaCuentas) {
@@ -96,8 +123,12 @@ public class Banco implements ICrudCuenta, ITransaccionesCuenta {
 		
 	}
 	
-	
-	public int SaldoCuenta(String id) throws Exception{
+	/**
+	 * metodo implementado del paquete de servicios 
+	 * que me devuelve el saldo de la cuenta
+	 */
+	@Override
+	public int consultarSaldo(String id) throws Exception{
 		for (Cuenta c : listaCuentas) {
 			if(c.getId().equals(id))
 				return c.getSaldo();	
@@ -106,7 +137,10 @@ public class Banco implements ICrudCuenta, ITransaccionesCuenta {
 		
 	}
 	
-	
+	/**
+	 * Metodo implementado del paquete de servicios 
+	 * que me consulta si una cuenta existe o no en el banco
+	 */
 	@Override
 	public boolean existeCuenta(String id)  throws NullPointerException {
 		for (Cuenta c : listaCuentas) {
@@ -116,6 +150,10 @@ public class Banco implements ICrudCuenta, ITransaccionesCuenta {
 		return false;
 	}
 	
+	/**
+	 * Metodo implementado del paquete de servicios
+	 * que me permite actualizar el nombre y el apellido
+	 */
 	@Override
 	public void actualizarCuenta(String id, String clave, String nuevoNombre, String nuevoApellido){
 		if(!id.equals("")){
@@ -129,6 +167,11 @@ public class Banco implements ICrudCuenta, ITransaccionesCuenta {
 		}
 	}
 	
+	
+	/**
+	 * metodo implementado del paquete de servicios
+	 * que me permite eliminar una cuenta del banco
+	 */
 	@Override
 	public void eliminarCuenta(String id, String motivo, String clave) throws Exception{
 		
@@ -148,6 +191,10 @@ public class Banco implements ICrudCuenta, ITransaccionesCuenta {
 	}
 
 
+	/**
+	 * metodo implementado del paquete de servicios
+	 * que me permite consignar dinero a una cuenta
+	 */
 	@Override
 	public void ConsignarDinero(String id, String cedula, int cantidad) throws Exception {
 		if(!id.equals("")){
@@ -170,6 +217,10 @@ public class Banco implements ICrudCuenta, ITransaccionesCuenta {
 	}
 
 
+	/**
+	 * metodo implementado del paquete de servicios
+	 * que me permite transferir dinero de mi cuenta a otra
+	 */
 	@Override
 	public void TransferirDinero(String idDestino, int cantidad, String idOrigen, String clave) throws Exception {
 		if(!idDestino.equals("") && !idOrigen.equals("") ){
@@ -205,7 +256,11 @@ public class Banco implements ICrudCuenta, ITransaccionesCuenta {
 		
 	}
 
-
+	
+	/**
+	 * metodo implementado del paquete de servicios
+	 * que me permite retirar dinero de mi cuenta
+	 */
 	@Override
 	public void RetirarDinero(String cedula, String id, int cantidad, String clave) throws Exception {
 		if(!id.equals("")){

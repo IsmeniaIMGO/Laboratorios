@@ -2,6 +2,9 @@ package model;
 
 public class Cuenta {
 	
+	/**
+	 * atributos
+	 */
 	private String id;
 	private int saldo;
 	private String clave;
@@ -11,6 +14,15 @@ public class Cuenta {
 	
 	
 
+	/**
+	 * constructor
+	 * @param id
+	 * @param saldo
+	 * @param clave
+	 * @param nombreUsuario
+	 * @param apellidoUsuario
+	 * @param cedula
+	 */
 	public Cuenta(String id, int saldo, String clave, String nombreUsuario, String apellidoUsuario, String cedula) {
 		super();
 		this.id = id;
@@ -21,6 +33,10 @@ public class Cuenta {
 		this.cedula = cedula;
 	}
 
+	/**
+	 * Metodos set y get de cada atributo
+	 * @return
+	 */
 	public String getId() {
 		return id;
 	}
@@ -69,7 +85,11 @@ public class Cuenta {
 	public void setCedula(String cedula) {
 		this.cedula = cedula;
 	}
-
+	
+	
+	/**
+	 * metodo hashcode con atributo id
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -78,6 +98,9 @@ public class Cuenta {
 		return result;
 	}
 
+	/**
+	 * metodo equals con atributo id
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -96,6 +119,9 @@ public class Cuenta {
 	}
 
 	
+	/**
+	 * metodo to string
+	 */
 	@Override
 	public String toString() {
 		return "Numero de Cuenta=" + id + ", saldo=" + saldo + ", clave=" + clave + ", nombre=" + nombreUsuario

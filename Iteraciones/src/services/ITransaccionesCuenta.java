@@ -7,4 +7,8 @@ public interface ITransaccionesCuenta {
 	public void TransferirDinero(String idDestino, int cantidad, String idOrigen, String clave) throws Exception;
 	
 	public void RetirarDinero(String cedula, String id, int cantidad, String clave) throws Exception;
+	
+	public int consultarSaldo(String id) throws Exception;
+	
+	public String informacionCuenta(String id) throws Exception;
 }

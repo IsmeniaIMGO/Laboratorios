@@ -13,24 +13,34 @@ import model.*;
 
 public class Servidor {
 	
+	/**
+	 * atributos
+	 */
 	public static final int PORT = 3400;
 	private ServerSocket listener;
 	private Socket serverSideSocket;
 	private PrintWriter toNetwork;
 	private BufferedReader fromNetwork;
-	private static final Scanner SCANNER = new Scanner(System.in);
 	
+	/**
+	 * inicializacion de atributos necesarios
+	 */
 	ArrayList<Cuenta>listaCuentas = new ArrayList<Cuenta>();
 	Banco banco = new Banco("x", listaCuentas);
 	Random random = new Random();
 	String[]palabras = new String[]{};
 
+	
 	public Servidor() {
 		System.out.println("Echo TCP server is running on port: " + PORT);
 		
 		
 	}
 	
+	/**
+	 * metodo que realiza acciones antes de la ejecucion de la clase
+	 * @throws Exception
+	 */
 	public void init() throws Exception {
 		listener = new ServerSocket(PORT);
 		while (true) {
@@ -40,6 +50,14 @@ public class Servidor {
 		}
 	}
 	
+	
+	/**
+	 * metodo que interpreta el mensaje que recibio del cliente
+	 * para luego realizar las acciones necesarias y finalmente
+	 * enviar una respuesta de acuerdo a la solicitud
+	 * @param socket
+	 * @throws Exception
+	 */
 	public void protocol(Socket socket) throws Exception {
 		String mensaje = fromNetwork.readLine();
 		System.out.println("[Server] From client: " + mensaje);
@@ -87,7 +105,7 @@ public class Servidor {
 			int cantidad = Integer.parseInt(palabras[3]);
 			
 			banco.ConsignarDinero(id, cedula, cantidad);
-			String answer = "se ha consigando en la cuenta numero: "+id + " su nuevo saldo es: " +banco.SaldoCuenta(id) ;
+			String answer = "se ha consignado"+cantidad +"en la cuenta numero: "+id ;
 			toNetwork.println(answer);
 
 			
@@ -99,9 +117,9 @@ public class Servidor {
 			
 			
 			banco.TransferirDinero(idDestino, cantidad, idOrigen, clave);
-			String answer = "se ha transferido "+cantidad+" a la cuenta numero: "+idDestino + " su nuevo saldo es: " +banco.SaldoCuenta(idOrigen) ;
+			String answer = "se ha transferido "+cantidad+" a la cuenta numero: "+idDestino + 
+							"\n el nuevo saldo de su cuenta: "+ idOrigen+" es: " +banco.consultarSaldo(idOrigen) ;
 			toNetwork.println(answer);
-
 
 			
 		}else if (palabras[0].equals("6")) {
@@ -111,21 +129,30 @@ public class Servidor {
 			String clave = palabras[4];
 
 			banco.RetirarDinero(cedula, id, cantidad, clave);
-			String answer = "se ha retirado "+cantidad+" de la cuenta numero: "+id + " su nuevo saldo es: " +banco.SaldoCuenta(id) ;
+			String answer = "se ha retirado "+cantidad+" de la cuenta numero: "+id + 
+							"\n su nuevo saldo es: " +banco.consultarSaldo(id) ;
 			toNetwork.println(answer);
 
 			
 		}else if (!palabras[0].equals("1")||!palabras[0].equals("2")||!palabras[0].equals("3")
 					||!palabras[0].equals("4")||!palabras[0].equals("5")||!palabras[0].equals("6")){
+			
 			String answer = "error 400: opcion no encontrada";
 			toNetwork.println(answer);
 		}
 	}
 	
+	/**
+	 * metodo que permite enviar o recibir mensajes
+	 * @param socket
+	 * @throws Exception
+	 */
 	private void createStreams(Socket socket) throws Exception {
 		toNetwork = new PrintWriter(socket.getOutputStream(), true);
 		fromNetwork = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 	}
+	
+	
 	public static void main(String args[]) throws Exception {
 		Servidor es = new Servidor();
 		es.init();
