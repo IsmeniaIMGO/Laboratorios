@@ -239,7 +239,7 @@ public class Banco implements ICrudUsuario, ICrudCuenta, ITransaccionesCuenta {
 	 * que me permite consignar dinero a una cuenta
 	 */
 	@Override
-	public void consignarDinero(String id, String cedula, int cantidad) throws Exception {
+	public void ConsignarDinero(String id, String cedula, int cantidad) throws Exception {
 		if(!id.equals("")){
 			
 			if(!existeCuenta(id))
@@ -265,7 +265,7 @@ public class Banco implements ICrudUsuario, ICrudCuenta, ITransaccionesCuenta {
 	 * que me permite transferir dinero de mi cuenta a otra
 	 */
 	@Override
-	public void transferirDinero(String idDestino, int cantidad, String idOrigen, String clave) throws Exception {
+	public void TransferirDinero(String idDestino, int cantidad, String idOrigen, String clave) throws Exception {
 		if(!idDestino.equals("") && !idOrigen.equals("") ){
 			if(!existeCuenta(idDestino))
 				throw new CuentaException("no existe ninguna cuenta con id de destino "+idDestino+" registrado en el Banco");
@@ -305,7 +305,7 @@ public class Banco implements ICrudUsuario, ICrudCuenta, ITransaccionesCuenta {
 	 * que me permite retirar dinero de mi cuenta
 	 */
 	@Override
-	public void retirarDinero(String cedula, String id, int cantidad, String clave) throws Exception {
+	public void RetirarDinero(String cedula, String id, int cantidad, String clave) throws Exception {
 		if(!id.equals("")){
 			if(!existeCuenta(id))
 				throw new CuentaException("no existe ninguna cuenta con id "+id+" registrado en el Banco");
