@@ -1,0 +1,11 @@
+package services;
+
+import model.Cuenta;
+import model.Usuario;
+
+public interface ICrudUsuario {
+	
+	public Cuenta crearUsuario(String nombre, String apellido, String cedula ) throws Exception;
+	
+	
+}

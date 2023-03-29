@@ -1,4 +1,2 @@
 INDEX VERSION 1.129+C:\Users\marce\OneDrive\Documents\MARCELA\Ing. Sistemas\6to semestre\Infraestructura Comunicaciones\practica\Laboratorios_ws\.metadata\.plugins\org.eclipse.jdt.core
-797642990.index
-673065396.index
 1442732222.index
