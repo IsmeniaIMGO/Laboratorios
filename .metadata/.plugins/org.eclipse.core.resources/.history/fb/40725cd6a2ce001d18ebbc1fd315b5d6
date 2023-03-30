@@ -10,9 +10,9 @@ public class Cliente {
 	/**
 	 * atributos
 	 */
-	private static final Scanner SCANNER = new Scanner(System.in);	//definimos entrada por teclado
-	public static final String SERVER = "4.tcp.ngrok.io"; 				//definimos la direccion ip del servidor
-	public static final int PORT = 13295;								 //definimos el puerto por donde se van a comunicar el cliente y el servidor
+	private static final Scanner SCANNER = new Scanner(System.in);//definimos entrada por teclado
+	public static final String SERVER = "0.tcp.ngrok.io"; //definimos la direccion ip del servidor
+	public static final int PORT = 18856; //definimos el puerto por donde se van a comunicar el cliente y el servidor
 	private PrintWriter toNetwork;
 	private BufferedReader fromNetwork;
 	private Socket clientSideSocket;
